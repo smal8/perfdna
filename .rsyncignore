@@ -3,3 +3,4 @@ __pycache__/
 *.pt
 *.log
 .git/
+rsync.sh # to sync remote, local script
