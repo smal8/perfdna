@@ -1,0 +1,418 @@
+Graph break: from user code at:
+  File "/content/perfdna/gcn/gcn.py", line 12, in forward
+    x = self.conv1(x, edge_index)
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/usr/local/lib/python3.12/dist-packages/torch_geometric/nn/conv/gcn_conv.py", line 241, in forward
+    edge_index, edge_weight = gcn_norm(  # yapf: disable
+  File "/usr/local/lib/python3.12/dist-packages/torch_geometric/nn/conv/gcn_conv.py", line 99, in gcn_norm
+    edge_index, edge_weight = add_remaining_self_loops(
+  File "/usr/local/lib/python3.12/dist-packages/torch_geometric/utils/loop.py", line 650, in add_remaining_self_loops
+    edge_index = edge_index[:, mask]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/utils.py", line 1903, in run_node
+    return node.target(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/_stats.py", line 21, in wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/fake_tensor.py", line 1061, in __torch_dispatch__
+    return self.dispatch(func, types, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/fake_tensor.py", line 1450, in dispatch
+    return self._cached_dispatch_impl(func, types, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/fake_tensor.py", line 1153, in _cached_dispatch_impl
+    output = self._dispatch_impl(func, types, args, kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/fake_tensor.py", line 1730, in _dispatch_impl
+    op_impl_out = op_impl(self, func, *args, **kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/fake_impls.py", line 150, in dispatch_to_op_implementations_dict
+    return op_implementations_dict[func](fake_mode, func, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/fake_impls.py", line 549, in index_tensor
+    out = meta_index_Tensor(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_meta_registrations.py", line 2994, in meta_index_Tensor
+    nonzero = index.nonzero()
+              ^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/_stats.py", line 21, in wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/fake_tensor.py", line 1061, in __torch_dispatch__
+    return self.dispatch(func, types, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/fake_tensor.py", line 1450, in dispatch
+    return self._cached_dispatch_impl(func, types, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/fake_tensor.py", line 1153, in _cached_dispatch_impl
+    output = self._dispatch_impl(func, types, args, kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/fake_tensor.py", line 1730, in _dispatch_impl
+    op_impl_out = op_impl(self, func, *args, **kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/fake_impls.py", line 150, in dispatch_to_op_implementations_dict
+    return op_implementations_dict[func](fake_mode, func, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/fake_impls.py", line 395, in nonzero
+    raise DynamicOutputShapeException(func)
+torch._subclasses.fake_tensor.DynamicOutputShapeException: aten.nonzero.default
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/utils.py", line 1785, in get_fake_value
+    ret_val = wrap_fake_exception(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/utils.py", line 1300, in wrap_fake_exception
+    return fn()
+           ^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/utils.py", line 1786, in <lambda>
+    lambda: run_node(tx.output, node, args, kwargs, nnmodule)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/utils.py", line 1921, in run_node
+    raise RuntimeError(make_error_message(e)).with_traceback(
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/utils.py", line 1903, in run_node
+    return node.target(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/_stats.py", line 21, in wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/fake_tensor.py", line 1061, in __torch_dispatch__
+    return self.dispatch(func, types, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/fake_tensor.py", line 1450, in dispatch
+    return self._cached_dispatch_impl(func, types, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/fake_tensor.py", line 1153, in _cached_dispatch_impl
+    output = self._dispatch_impl(func, types, args, kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/fake_tensor.py", line 1730, in _dispatch_impl
+    op_impl_out = op_impl(self, func, *args, **kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/fake_impls.py", line 150, in dispatch_to_op_implementations_dict
+    return op_implementations_dict[func](fake_mode, func, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/fake_impls.py", line 549, in index_tensor
+    out = meta_index_Tensor(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_meta_registrations.py", line 2994, in meta_index_Tensor
+    nonzero = index.nonzero()
+              ^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/_stats.py", line 21, in wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/fake_tensor.py", line 1061, in __torch_dispatch__
+    return self.dispatch(func, types, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/fake_tensor.py", line 1450, in dispatch
+    return self._cached_dispatch_impl(func, types, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/fake_tensor.py", line 1153, in _cached_dispatch_impl
+    output = self._dispatch_impl(func, types, args, kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/fake_tensor.py", line 1730, in _dispatch_impl
+    op_impl_out = op_impl(self, func, *args, **kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/fake_impls.py", line 150, in dispatch_to_op_implementations_dict
+    return op_implementations_dict[func](fake_mode, func, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/fake_impls.py", line 395, in nonzero
+    raise DynamicOutputShapeException(func)
+RuntimeError: Failed running call_function <built-in function getitem>(*(FakeTensor(..., device='cuda:0', size=(2, 10556), dtype=torch.int64), (slice(None, None, None), FakeTensor(..., device='cuda:0', size=(10556,), dtype=torch.bool))), **{}):
+aten.nonzero.default
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 499, in wrapper
+    return inner_fn(self, inst)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 2059, in CALL
+    self.call_function(fn, args, kwargs)
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 743, in call_function
+    self.push(fn.call_function(self, args, kwargs))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/variables/nn_module.py", line 437, in call_function
+    return tx.inline_user_function_return(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 749, in inline_user_function_return
+    return InliningInstructionTranslator.inline_call(self, fn, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 2666, in inline_call
+    return cls.inline_call_(parent, func, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 2782, in inline_call_
+    tracer.run()
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 893, in run
+    while self.step():
+          ^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 805, in step
+    self.dispatch_table[inst.opcode](self, inst)
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 499, in wrapper
+    return inner_fn(self, inst)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 1500, in CALL_FUNCTION_EX
+    self.call_function(fn, argsvars.items, kwargsvars)
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 743, in call_function
+    self.push(fn.call_function(self, args, kwargs))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/variables/functions.py", line 344, in call_function
+    return super().call_function(tx, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/variables/functions.py", line 293, in call_function
+    return super().call_function(tx, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/variables/functions.py", line 90, in call_function
+    return tx.inline_user_function_return(self, [*self.self_args(), *args], kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 749, in inline_user_function_return
+    return InliningInstructionTranslator.inline_call(self, fn, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 2666, in inline_call
+    return cls.inline_call_(parent, func, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 2782, in inline_call_
+    tracer.run()
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 893, in run
+    while self.step():
+          ^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 805, in step
+    self.dispatch_table[inst.opcode](self, inst)
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 499, in wrapper
+    return inner_fn(self, inst)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 2059, in CALL
+    self.call_function(fn, args, kwargs)
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 743, in call_function
+    self.push(fn.call_function(self, args, kwargs))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/variables/functions.py", line 293, in call_function
+    return super().call_function(tx, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/variables/functions.py", line 90, in call_function
+    return tx.inline_user_function_return(self, [*self.self_args(), *args], kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 749, in inline_user_function_return
+    return InliningInstructionTranslator.inline_call(self, fn, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 2666, in inline_call
+    return cls.inline_call_(parent, func, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 2782, in inline_call_
+    tracer.run()
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 893, in run
+    while self.step():
+          ^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 805, in step
+    self.dispatch_table[inst.opcode](self, inst)
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 499, in wrapper
+    return inner_fn(self, inst)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 2059, in CALL
+    self.call_function(fn, args, kwargs)
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 743, in call_function
+    self.push(fn.call_function(self, args, kwargs))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/variables/functions.py", line 293, in call_function
+    return super().call_function(tx, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/variables/functions.py", line 90, in call_function
+    return tx.inline_user_function_return(self, [*self.self_args(), *args], kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 749, in inline_user_function_return
+    return InliningInstructionTranslator.inline_call(self, fn, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 2666, in inline_call
+    return cls.inline_call_(parent, func, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 2782, in inline_call_
+    tracer.run()
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 893, in run
+    while self.step():
+          ^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 805, in step
+    self.dispatch_table[inst.opcode](self, inst)
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 499, in wrapper
+    return inner_fn(self, inst)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py", line 234, in impl
+    self.push(fn_var.call_function(self, self.popn(nargs), {}))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/variables/builtin.py", line 962, in call_function
+    return handler(tx, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/variables/builtin.py", line 941, in _handle_insert_op_in_graph
+    return wrap_fx_proxy(tx, proxy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/variables/builder.py", line 1713, in wrap_fx_proxy
+    return wrap_fx_proxy_cls(target_cls=TensorVariable, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/variables/builder.py", line 1798, in wrap_fx_proxy_cls
+    example_value = get_fake_value(proxy.node, tx, allow_non_graph_fake=True)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/utils.py", line 1806, in get_fake_value
+    unimplemented(
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/exc.py", line 221, in unimplemented
+    raise Unsupported(msg)
+torch._dynamo.exc.Unsupported: dynamic shape operator: aten.nonzero.default; to enable, set torch._dynamo.config.capture_dynamic_output_shape_ops = True
+TRACED GRAPH
+ ===== __compiled_fn_11 =====
+ /usr/local/lib/python3.12/dist-packages/torch/fx/_lazy_graph_module.py class GraphModule(torch.nn.Module):
+    def forward(self, L_edge_index_: "i64[2, 10556][10556, 1]cuda:0"):
+        l_edge_index_ = L_edge_index_
+        
+        # File: /usr/local/lib/python3.12/dist-packages/torch_geometric/utils/loop.py:624 in add_remaining_self_loops, code: mask = edge_index[0] != edge_index[1]
+        getitem: "i64[10556][1]cuda:0" = l_edge_index_[0]
+        getitem_1: "i64[10556][1]cuda:0" = l_edge_index_[1];  l_edge_index_ = None
+        mask: "b8[10556][1]cuda:0" = getitem != getitem_1;  getitem = getitem_1 = None
+        
+        # File: /usr/local/lib/python3.12/dist-packages/torch_geometric/utils/loop.py:634 in add_remaining_self_loops, code: loop_index = torch.arange(0, N, device=device).view(1, -1).repeat(2, 1)
+        arange: "i64[2708][1]cuda:0" = torch.arange(0, 2708, device = device(type='cuda', index=0))
+        view: "i64[1, 2708][2708, 1]cuda:0" = arange.view(1, -1);  arange = None
+        loop_index: "i64[2, 2708][2708, 1]cuda:0" = view.repeat(2, 1);  view = None
+        return (mask, loop_index)
+        
+
+TRACED GRAPH
+ ===== __compiled_fn_14 =====
+ /usr/local/lib/python3.12/dist-packages/torch/fx/_lazy_graph_module.py class GraphModule(torch.nn.Module):
+    def forward(self, L_stack0_: "i64[2, 10556][10556, 1]cuda:0", L_loop_index_: "i64[2, 2708][2708, 1]cuda:0"):
+        l_stack0_ = L_stack0_
+        l_loop_index_ = L_loop_index_
+        
+        # File: /usr/local/lib/python3.12/dist-packages/torch_geometric/utils/loop.py:655 in torch_dynamo_resume_in_add_remaining_self_loops_at_650, code: edge_index = torch.cat([edge_index, loop_index], dim=1)
+        edge_index: "i64[2, 13264][13264, 1]cuda:0" = torch.cat([l_stack0_, l_loop_index_], dim = 1);  l_stack0_ = l_loop_index_ = None
+        return (edge_index,)
+        
+
+TRACED GRAPH
+ ===== __compiled_fn_16 =====
+ /usr/local/lib/python3.12/dist-packages/torch/fx/_lazy_graph_module.py class GraphModule(torch.nn.Module):
+    def forward(self, L_stack0_0_: "i64[2, 13264][13264, 1]cuda:0"):
+        l_stack0_0_ = L_stack0_0_
+        
+        # File: /usr/local/lib/python3.12/dist-packages/torch_geometric/nn/conv/gcn_conv.py:103 in torch_dynamo_resume_in_gcn_norm_at_99, code: edge_weight = torch.ones((edge_index.size(1), ), dtype=dtype,
+        edge_weight: "f32[13264][1]cuda:0" = torch.ones((13264,), dtype = torch.float32, device = device(type='cuda', index=0))
+        
+        # File: /usr/local/lib/python3.12/dist-packages/torch_geometric/nn/conv/gcn_conv.py:106 in torch_dynamo_resume_in_gcn_norm_at_99, code: row, col = edge_index[0], edge_index[1]
+        row: "i64[13264][1]cuda:0" = l_stack0_0_[0]
+        col: "i64[13264][1]cuda:0" = l_stack0_0_[1];  l_stack0_0_ = None
+        
+        # File: /usr/local/lib/python3.12/dist-packages/torch_geometric/utils/_scatter.py:144 in broadcast, code: return src.view(size).expand_as(ref)
+        view: "i64[13264][1]cuda:0" = col.view((-1,))
+        index: "i64[13264][1]cuda:0" = view.expand_as(edge_weight);  view = None
+        
+        # File: /usr/local/lib/python3.12/dist-packages/torch_geometric/utils/_scatter.py:70 in scatter, code: return src.new_zeros(size).scatter_add_(dim, index, src)
+        new_zeros: "f32[2708][1]cuda:0" = edge_weight.new_zeros((2708,))
+        deg: "f32[2708][1]cuda:0" = new_zeros.scatter_add_(0, index, edge_weight);  new_zeros = index = None
+        
+        # File: /usr/local/lib/python3.12/dist-packages/torch_geometric/nn/conv/gcn_conv.py:109 in torch_dynamo_resume_in_gcn_norm_at_99, code: deg_inv_sqrt = deg.pow_(-0.5)
+        deg_inv_sqrt: "f32[2708][1]cuda:0" = deg.pow_(-0.5);  deg = None
+        
+        # File: /usr/local/lib/python3.12/dist-packages/torch_geometric/nn/conv/gcn_conv.py:110 in torch_dynamo_resume_in_gcn_norm_at_99, code: deg_inv_sqrt.masked_fill_(deg_inv_sqrt == float('inf'), 0)
+        eq: "b8[2708][1]cuda:0" = deg_inv_sqrt == inf
+        masked_fill_: "f32[2708][1]cuda:0" = deg_inv_sqrt.masked_fill_(eq, 0);  eq = None
+        
+        # File: /usr/local/lib/python3.12/dist-packages/torch_geometric/nn/conv/gcn_conv.py:111 in torch_dynamo_resume_in_gcn_norm_at_99, code: edge_weight = deg_inv_sqrt[row] * edge_weight * deg_inv_sqrt[col]
+        getitem_2: "f32[13264][1]cuda:0" = deg_inv_sqrt[row];  row = None
+        mul: "f32[13264][1]cuda:0" = getitem_2 * edge_weight;  getitem_2 = edge_weight = None
+        getitem_3: "f32[13264][1]cuda:0" = deg_inv_sqrt[col];  deg_inv_sqrt = col = None
+        edge_weight_1: "f32[13264][1]cuda:0" = mul * getitem_3;  mul = getitem_3 = None
+        return (edge_weight_1,)
+        
+
+TRACED GRAPH
+ ===== __compiled_fn_18 =====
+ /usr/local/lib/python3.12/dist-packages/torch/fx/_lazy_graph_module.py class GraphModule(torch.nn.Module):
+    def forward(self, L_stack0_0_: "i64[2, 13264][13264, 1]cuda:0", L_stack0_1_: "f32[13264][1]cuda:0", L_x_: "f32[2708, 1433][1433, 1]cuda:0"):
+        l_stack0_0_ = L_stack0_0_
+        l_stack0_1_ = L_stack0_1_
+        l_x_ = L_x_
+        
+        # File: /usr/local/lib/python3.12/dist-packages/torch_geometric/nn/dense/linear.py:127 in forward, code: return F.linear(x, self.weight, self.bias)
+        l__self___lin_weight: "f32[16, 1433][1433, 1]cuda:0" = self.L__self___lin_weight
+        x: "f32[2708, 16][16, 1]cuda:0" = torch._C._nn.linear(l_x_, l__self___lin_weight, None);  l_x_ = l__self___lin_weight = None
+        
+        # File: /tmp/torch_geometric.nn.conv.gcn_conv_GCNConv_propagate_wlw1dik6.py:62 in collect, code: edge_index_i = edge_index[i]
+        edge_index_i: "i64[13264][1]cuda:0" = l_stack0_0_[1]
+        
+        # File: /tmp/torch_geometric.nn.conv.gcn_conv_GCNConv_propagate_wlw1dik6.py:63 in collect, code: edge_index_j = edge_index[j]
+        edge_index_j: "i64[13264][1]cuda:0" = l_stack0_0_[0];  l_stack0_0_ = None
+        
+        # File: /usr/local/lib/python3.12/dist-packages/torch_geometric/nn/conv/message_passing.py:265 in _index_select, code: return src.index_select(self.node_dim, index)
+        x_j: "f32[13264, 16][16, 1]cuda:0" = x.index_select(-2, edge_index_j);  x = edge_index_j = None
+        
+        # File: /usr/local/lib/python3.12/dist-packages/torch_geometric/nn/conv/gcn_conv.py:271 in message, code: return x_j if edge_weight is None else edge_weight.view(-1, 1) * x_j
+        view: "f32[13264, 1][1, 1]cuda:0" = l_stack0_1_.view(-1, 1);  l_stack0_1_ = None
+        out: "f32[13264, 16][16, 1]cuda:0" = view * x_j;  view = x_j = None
+        
+        # File: /usr/local/lib/python3.12/dist-packages/torch_geometric/utils/_scatter.py:144 in broadcast, code: return src.view(size).expand_as(ref)
+        view_1: "i64[13264, 1][1, 1]cuda:0" = edge_index_i.view((-1, 1));  edge_index_i = None
+        index: "i64[13264, 16][1, 0]cuda:0" = view_1.expand_as(out);  view_1 = None
+        
+        # File: /usr/local/lib/python3.12/dist-packages/torch_geometric/utils/_scatter.py:70 in scatter, code: return src.new_zeros(size).scatter_add_(dim, index, src)
+        new_zeros: "f32[2708, 16][16, 1]cuda:0" = out.new_zeros((2708, 16))
+        out_1: "f32[2708, 16][16, 1]cuda:0" = new_zeros.scatter_add_(0, index, out);  new_zeros = index = out = None
+        
+        # File: /usr/local/lib/python3.12/dist-packages/torch_geometric/nn/conv/gcn_conv.py:265 in torch_dynamo_resume_in_forward_at_241, code: if self.bias is not None:
+        l__self___bias: "f32[16][1]cuda:0" = self.L__self___bias
+        
+        # File: /usr/local/lib/python3.12/dist-packages/torch_geometric/nn/conv/gcn_conv.py:266 in torch_dynamo_resume_in_forward_at_241, code: out = out + self.bias
+        out_2: "f32[2708, 16][16, 1]cuda:0" = out_1 + l__self___bias;  out_1 = l__self___bias = None
+        return (out_2,)
+        
+
+TRACED GRAPH
+ ===== __compiled_fn_21 =====
+ /usr/local/lib/python3.12/dist-packages/torch/fx/_lazy_graph_module.py class GraphModule(torch.nn.Module):
+    def forward(self, L_stack0_: "f32[2708, 16][16, 1]cuda:0"):
+        l_stack0_ = L_stack0_
+        
+        # File: /content/perfdna/gcn/gcn.py:13 in torch_dynamo_resume_in_forward_at_12, code: x = F.relu(x)
+        x: "f32[2708, 16][16, 1]cuda:0" = torch.nn.functional.relu(l_stack0_);  l_stack0_ = None
+        return (x,)
+        
+
+TRACED GRAPH
+ ===== __compiled_fn_27 =====
+ /usr/local/lib/python3.12/dist-packages/torch/fx/_lazy_graph_module.py class GraphModule(torch.nn.Module):
+    def forward(self, L_stack0_0_: "i64[2, 13264][13264, 1]cuda:0", L_stack0_1_: "f32[13264][1]cuda:0", L_x_: "f32[2708, 16][16, 1]cuda:0"):
+        l_stack0_0_ = L_stack0_0_
+        l_stack0_1_ = L_stack0_1_
+        l_x_ = L_x_
+        
+        # File: /usr/local/lib/python3.12/dist-packages/torch_geometric/nn/dense/linear.py:127 in forward, code: return F.linear(x, self.weight, self.bias)
+        l__self___lin_weight: "f32[7, 16][16, 1]cuda:0" = self.L__self___lin_weight
+        x: "f32[2708, 7][7, 1]cuda:0" = torch._C._nn.linear(l_x_, l__self___lin_weight, None);  l_x_ = l__self___lin_weight = None
+        
+        # File: /tmp/torch_geometric.nn.conv.gcn_conv_GCNConv_propagate_wlw1dik6.py:62 in collect, code: edge_index_i = edge_index[i]
+        edge_index_i: "i64[13264][1]cuda:0" = l_stack0_0_[1]
+        
+        # File: /tmp/torch_geometric.nn.conv.gcn_conv_GCNConv_propagate_wlw1dik6.py:63 in collect, code: edge_index_j = edge_index[j]
+        edge_index_j: "i64[13264][1]cuda:0" = l_stack0_0_[0];  l_stack0_0_ = None
+        
+        # File: /usr/local/lib/python3.12/dist-packages/torch_geometric/nn/conv/message_passing.py:265 in _index_select, code: return src.index_select(self.node_dim, index)
+        x_j: "f32[13264, 7][7, 1]cuda:0" = x.index_select(-2, edge_index_j);  x = edge_index_j = None
+        
+        # File: /usr/local/lib/python3.12/dist-packages/torch_geometric/nn/conv/gcn_conv.py:271 in message, code: return x_j if edge_weight is None else edge_weight.view(-1, 1) * x_j
+        view: "f32[13264, 1][1, 1]cuda:0" = l_stack0_1_.view(-1, 1);  l_stack0_1_ = None
+        out: "f32[13264, 7][7, 1]cuda:0" = view * x_j;  view = x_j = None
+        
+        # File: /usr/local/lib/python3.12/dist-packages/torch_geometric/utils/_scatter.py:144 in broadcast, code: return src.view(size).expand_as(ref)
+        view_1: "i64[13264, 1][1, 1]cuda:0" = edge_index_i.view((-1, 1));  edge_index_i = None
+        index: "i64[13264, 7][1, 0]cuda:0" = view_1.expand_as(out);  view_1 = None
+        
+        # File: /usr/local/lib/python3.12/dist-packages/torch_geometric/utils/_scatter.py:70 in scatter, code: return src.new_zeros(size).scatter_add_(dim, index, src)
+        new_zeros: "f32[2708, 7][7, 1]cuda:0" = out.new_zeros((2708, 7))
+        out_1: "f32[2708, 7][7, 1]cuda:0" = new_zeros.scatter_add_(0, index, out);  new_zeros = index = out = None
+        
+        # File: /usr/local/lib/python3.12/dist-packages/torch_geometric/nn/conv/gcn_conv.py:265 in torch_dynamo_resume_in_forward_at_241, code: if self.bias is not None:
+        l__self___bias: "f32[7][1]cuda:0" = self.L__self___bias
+        
+        # File: /usr/local/lib/python3.12/dist-packages/torch_geometric/nn/conv/gcn_conv.py:266 in torch_dynamo_resume_in_forward_at_241, code: out = out + self.bias
+        out_2: "f32[2708, 7][7, 1]cuda:0" = out_1 + l__self___bias;  out_1 = l__self___bias = None
+        return (out_2,)
+        
+
