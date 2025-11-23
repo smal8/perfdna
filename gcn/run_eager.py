@@ -17,7 +17,7 @@ def main():
 
     model = GCN(
         in_dim = dataset.num_node_features,
-        hid_dim = 15,
+        hid_dim = 16,
         out_dim = dataset.num_classes
     ).to(device)
 
