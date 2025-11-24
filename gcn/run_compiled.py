@@ -1,6 +1,7 @@
 import time
 import torch
 from torch_geometric.datasets import Planetoid
+from nvtx_wrap import add_nvtx
 from gcn import GCN
 
 def main():
@@ -16,9 +17,15 @@ def main():
         out_dim = dataset.num_classes
     ).to(device)
 
+    add_nvtx(model)
     model.eval()
 
-    compiled_model = torch.compile(model)
+
+    # compile_model = torch.compile(model)
+    # fullgraph stops dynamo from graph breaking
+    # If a single part of the model can't be compiled, FAIL
+    # instead of silently failing back to eager mode
+    compiled_model = torch.compile(model, backend="inductor", fullgraph=True)
 
     with torch.no_grad():
         start = time.time()
